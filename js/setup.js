@@ -14,19 +14,27 @@ var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Валь
 var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
 
+var amount = 4;
+
 var getRandom = function (array) {
   var index = Math.floor(Math.random() * array.length);
   return array[index];
 };
 
-var generateWizards = function (namesArr, surnamesArr, coatColorsArr, eyesColorsArr, amount) {
+var getWizard = function () {
+  var wizard = {};
+  wizard.name = getRandom(names) + ' ' + getRandom(surnames);
+  wizard.coatColor = getRandom(coatColors);
+  wizard.eyesColor = getRandom(eyesColors);
+
+  return wizard;
+};
+
+var generateWizards = function () {
   var wizards = [];
 
   for (var i = 0; i < amount; i++) {
-    wizards[i] = {};
-    wizards[i].name = getRandom(namesArr) + ' ' + getRandom(surnamesArr);
-    wizards[i].coatColor = getRandom(coatColorsArr);
-    wizards[i].eyesColor = getRandom(eyesColorsArr);
+    wizards[i] = getWizard();
   }
 
   return wizards;
@@ -52,7 +60,7 @@ var showWizards = function (wizards) {
   similarListElement.appendChild(fragment);
 };
 
-var wizards = generateWizards(names, surnames, coatColors, eyesColors, 4);
+var wizards = generateWizards();
 
 showWizards(wizards);
 
