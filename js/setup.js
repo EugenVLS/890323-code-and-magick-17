@@ -1,7 +1,6 @@
 'use strict';
 
 var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
 
 var similarListElement = userDialog.querySelector('.setup-similar-list');
 
@@ -13,6 +12,7 @@ var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Крис�
 var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
+var fireballColors = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
 var amount = 4;
 
@@ -65,3 +65,79 @@ var wizards = generateWizards();
 showWizards(wizards);
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
+
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
+var nameInput = setup.querySelector('.setup-user-name');
+var wizardCoat = setup.querySelector('.setup-wizard .wizard-coat');
+var wizardEyes = setup.querySelector('.setup-wizard .wizard-eyes');
+var wizardFireball = setup.querySelector('.setup-fireball-wrap');
+var coatColorInput = setup.querySelector('input[name = \'coat-color\']');
+var eyesColorInput = setup.querySelector('input[name = \'eyes-color\']');
+var fireballColorInput = setup.querySelector('input[name = \'fireball-color\']');
+
+wizardCoat.addEventListener('click', function (evt) {
+  var randomColor = getRandom(coatColors);
+  evt.currentTarget.style.fill = randomColor;
+  coatColorInput.value = randomColor;
+});
+
+wizardEyes.addEventListener('click', function (evt) {
+  var randomColor = getRandom(eyesColors);
+  evt.currentTarget.style.fill = randomColor;
+  eyesColorInput.value = randomColor;
+});
+
+wizardFireball.addEventListener('click', function (evt) {
+  var randomColor = getRandom(fireballColors);
+  evt.currentTarget.style.background = randomColor;
+  fireballColorInput.value = randomColor;
+});
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});
+
+nameInput.addEventListener('focus', function () {
+  document.removeEventListener('keydown', onPopupEscPress);
+});
+
+nameInput.addEventListener('blur', function () {
+  document.addEventListener('keydown', onPopupEscPress);
+});
