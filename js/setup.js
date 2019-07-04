@@ -80,23 +80,29 @@ var coatColorInput = setup.querySelector('input[name = \'coat-color\']');
 var eyesColorInput = setup.querySelector('input[name = \'eyes-color\']');
 var fireballColorInput = setup.querySelector('input[name = \'fireball-color\']');
 
-wizardCoat.addEventListener('click', function (evt) {
+var setCoatColor = function (evt) {
   var randomColor = getRandom(coatColors);
   evt.currentTarget.style.fill = randomColor;
   coatColorInput.value = randomColor;
-});
+};
 
-wizardEyes.addEventListener('click', function (evt) {
+var setEyesColor = function (evt) {
   var randomColor = getRandom(eyesColors);
   evt.currentTarget.style.fill = randomColor;
   eyesColorInput.value = randomColor;
-});
+};
 
-wizardFireball.addEventListener('click', function (evt) {
+var setFireBallColor = function (evt) {
   var randomColor = getRandom(fireballColors);
   evt.currentTarget.style.background = randomColor;
   fireballColorInput.value = randomColor;
-});
+};
+
+wizardCoat.addEventListener('click', setCoatColor);
+
+wizardEyes.addEventListener('click', setEyesColor);
+
+wizardFireball.addEventListener('click', setFireBallColor);
 
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
