@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 'use strict';
 
 var userDialog = document.querySelector('.setup');
@@ -79,6 +80,7 @@ var wizardFireball = setup.querySelector('.setup-fireball-wrap');
 var coatColorInput = setup.querySelector('input[name = \'coat-color\']');
 var eyesColorInput = setup.querySelector('input[name = \'eyes-color\']');
 var fireballColorInput = setup.querySelector('input[name = \'fireball-color\']');
+var openCoords = {};
 
 var setCoatColor = function (evt) {
   var randomColor = getRandom(coatColors);
@@ -113,18 +115,22 @@ var onPopupEscPress = function (evt) {
 var openPopup = function () {
   setup.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
+  openCoords.x = setup.offsetLeft;
+  openCoords.y = setup.offsetTop;
 };
 
 var closePopup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
+  setup.style.top = openCoords.y + 'px';
+  setup.style.left = openCoords.x + 'px';
 };
 
 setupOpen.addEventListener('click', function () {
   openPopup();
 });
 
-setupOpen.addEventListener('keydown', function (evt) {
+setupOpen.addEventListener('keydown', function () {
   if (evt.keyCode === ENTER_KEYCODE) {
     openPopup();
   }
