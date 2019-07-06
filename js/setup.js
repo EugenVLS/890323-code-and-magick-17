@@ -156,6 +156,11 @@ nameInput.addEventListener('blur', function () {
 
 var dialogHandler = setup.querySelector('.upload');
 
+var onClickPreventDefault = function (evt) {
+  evt.preventDefault();
+  dialogHandler.removeEventListener('click', onClickPreventDefault);
+};
+
 dialogHandler.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
 
@@ -191,10 +196,6 @@ dialogHandler.addEventListener('mousedown', function (evt) {
     document.removeEventListener('mouseup', onMouseUp);
 
     if (dragged) {
-      var onClickPreventDefault = function (evt) {
-        evt.preventDefault();
-        dialogHandler.removeEventListener('click', onClickPreventDefault);
-      };
       dialogHandler.addEventListener('click', onClickPreventDefault);
     }
   };
