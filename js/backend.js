@@ -3,6 +3,7 @@
 (function () {
   var GET_URL = 'https://js.dump.academy/code-and-magick/data';
   var POST_URL = 'https://js.dump.academy/code-and-magick';
+
   window.backend = {
     load: function (onLoad, onError) {
       var xhr = new XMLHttpRequest();
