@@ -65,9 +65,9 @@
   wizardFireball.addEventListener('click', setFireBallColor);
 
   form.addEventListener('submit', function (evt) {
+    evt.preventDefault();
     window.backend.save(new FormData(form), function () {
       setup.classList.add('hidden');
     });
-    evt.preventDefault();
   });
 })();
